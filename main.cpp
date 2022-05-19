@@ -90,8 +90,21 @@ protected:
     vector<mezoO> O;
     vector<mezoX> X;
 public:
-    void setmap(int newsize){
+    void setmapsiz(int newsize){
         mapsize=newsize;
+    }
+    void gamemap(){
+        for(int i=0,i<ures.size() or i<O.size()+X.size(),i++){
+            if(i<ures.size()){
+                ures[i].rajz();
+            }
+            if(i<O.size()){
+                O[i].rajz();
+            }
+            if(i<X.size()){
+                X[i].rajz();
+            }
+        }
     }
     void athelyez(event ev){
         if(Oturn==true and Xturn==false and ev.button>0){
