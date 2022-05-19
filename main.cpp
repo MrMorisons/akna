@@ -1,4 +1,5 @@
 #include "graphics.hpp"
+#include "cmath"
 using namespace genv;
 
 class widget{
@@ -31,6 +32,29 @@ public:
 };
 
 struct mezoures:widget{
+protected:
+public:
+    void rajz(){
+        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
+    }
+};
+
+struct mezoO:widget{
+protected:
+public:
+    void rajz(){
+        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
+        for(int i=0;i<sy;i++){
+            for(int j=0;j<sx;j++){
+                if(i^2+j^2==((sx-2)/2)^2){
+                    gout<<color(255,0,0)<<move_to(x+j,y+i)<<dot;
+                }
+            }
+        }
+    }
+};
+
+struct mezoy:widget{
 protected:
 public:
     void rajz(){
