@@ -30,6 +30,14 @@ public:
     void rajz();
 };
 
+struct mezoures:widget{
+protected:
+public:
+    void rajz(){
+        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
+    }
+};
+
 int main()
 {
     gout.open(400,400);
