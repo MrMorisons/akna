@@ -93,11 +93,25 @@ public:
     void setmap(int newsize){
         mapsize=newsize;
     }
-    void turn(event ev){
+    void athelyez(event ev){
         if(Oturn==true and Xturn==false and ev.button>0){
             for(int i=0;i<ures.size();i++){
-                if(ures[i].kivan()==true)
-                O.push_back();
+                if(ures[i].kivan()==true){
+                    mezoO uj;
+                    uj.setkord(ures[i].retx(),ures[i].rety());
+                    uj.setsize(ures[i].retsx(),ures[i].retsy());
+                    O.push_back(uj);
+                }
+            }
+        }
+        if(Oturn==false and Xturn==true and ev.button>0){
+            for(int i=0;i<ures.size();i++){
+                if(ures[i].kivan()==true){
+                    mezoX uj;
+                    uj.setkord(ures[i].retx(),ures[i].rety());
+                    uj.setsize(ures[i].retsx(),ures[i].retsy());
+                    X.push_back(uj);
+                }
             }
         }
     }
