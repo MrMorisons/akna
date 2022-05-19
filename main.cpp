@@ -4,6 +4,8 @@
 
 using namespace genv;
 using namespace std;
+int const xx=1500;
+int const yy=1500;
 
 class widget{
 protected:
@@ -92,6 +94,15 @@ protected:
 public:
     void setmapsiz(int newsize){
         mapsize=newsize;
+    }
+    void setgamemap(){
+        for(int i;i<mapsize;i++){
+            for(int j;j<mapsize;j++){
+                mezoures uj;
+                uj.setsize(xx/mapsize,yy/mapsize);
+                uj.setkord(i*uj.retsx(),j*uj.retsy());
+            }
+        }
     }
     void gamemap(){
         for(int i=0;i<ures.size() or i<O.size()+X.size();i++){
@@ -240,7 +251,8 @@ public:
 
 int main()
 {
-    gout.open(400,400);
+
+    gout.open(xx,yy);
     event ev;
     while(gin >> ev) {
     }
