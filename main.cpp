@@ -106,6 +106,114 @@ public:
             }
         }
     }
+    void gyozelemO(){
+        int counter=0;
+        int seged=0;
+        bool horizontal;
+        bool linear;
+        bool toright;
+        bool toleft;
+        if(O.size()>=5){
+            for(int i=0;i<O.size() and Oturn==true;i++){
+                horizontal=true;
+                linear=true;
+                toright=true;
+                toleft=true;
+                seged=i;
+                for(int j=0;j<O.size();j++){
+                    if(O[seged].retx()+O[seged].retsx()==O[j].retx() and O[seged].rety()==O[j].rety() and linear==true){
+                        counter++;
+                        horizontal=false;
+                        toright=false;
+                        toleft=false;
+                        seged=j;
+                        j=0;
+                    }
+                    if(O[seged].retx()==O[j].retx() and O[seged].rety()+O[seged].retsy()==O[j].rety() and horizontal==true){
+                        counter++;
+                        linear=false;
+                        toright=false;
+                        toleft=false;
+                        seged=j;
+                        j=0;
+                    }
+                    if(O[seged].retx()+O[seged].retsx()==O[j].retx() and O[seged].rety()+O[seged].retsy()==O[j].rety() and toright==true){
+                        counter++;
+                        horizontal=false;
+                        linear=false;
+                        toleft=false;
+                        seged=j;
+                        j=0;
+                    }
+                    if(O[seged].retx()==O[j].retx() and O[seged].rety()-O[seged].retsy()==O[j].rety() and toleft==true){
+                        counter++;
+                        horizontal=false;
+                        linear=false;
+                        toright=false;
+                        seged=j;
+                        j=0;
+                    }
+                }
+                if(counter==5){
+                    return true;
+                }
+            }
+        }
+    }
+    bool gyozelemX(){
+        int counter=0;
+        int seged=0;
+        bool horizontal=true;
+        bool linear=true;
+        bool toright=true;
+        bool toleft=true;
+        if(X.size()>=5){
+            for(int i=0;i<X.size() and Xturn==true;i++){
+                horizontal=true;
+                linear=true;
+                toright=true;
+                toleft=true;
+                seged=i;
+                for(int j=0;j<X.size();j++){
+                    if(X[seged].retx()+X[seged].retsx()==X[j].retx() and X[seged].rety()==X[j].rety() and linear==true){
+                        counter++;
+                        horizontal=false;
+                        toright=false;
+                        toleft=false;
+                        seged=j;
+                        j=0;
+                    }
+                    if(X[seged].retx()==X[j].retx() and X[seged].rety()+X[seged].retsy()==X[j].rety() and horizontal==true){
+                        counter++;
+                        linear=false;
+                        toright=false;
+                        toleft=false;
+                        seged=j;
+                        j=0;
+                    }
+                    if(X[seged].retx()+X[seged].retsx()==X[j].retx() and X[seged].rety()+X[seged].retsy()==X[j].rety() and toright==true){
+                        counter++;
+                        horizontal=false;
+                        linear=false;
+                        toleft=false;
+                        seged=j;
+                        j=0;
+                    }
+                    if(X[seged].retx()==X[j].retx() and X[seged].rety()-X[seged].retsy()==X[j].rety() and toleft==true){
+                        counter++;
+                        horizontal=false;
+                        linear=false;
+                        toright=false;
+                        seged=j;
+                        j=0;
+                    }
+                }
+                if(counter==5){
+                    return true;
+                }
+            }
+        }
+    }
     void athelyez(event ev){
         if(Oturn==true and Xturn==false and ev.button>0){
             for(int i=0;i<ures.size();i++){
