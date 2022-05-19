@@ -94,7 +94,7 @@ public:
         mapsize=newsize;
     }
     void gamemap(){
-        for(int i=0,i<ures.size() or i<O.size()+X.size(),i++){
+        for(int i=0;i<ures.size() or i<O.size()+X.size();i++){
             if(i<ures.size()){
                 ures[i].rajz();
             }
