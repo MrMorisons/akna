@@ -21,6 +21,18 @@ public:
         sx=new_x;
         sy=new_y;
     }
+    int retx(){
+        return x;
+    }
+    int rety(){
+        return y;
+    }
+    int retsx(){
+        return sx;
+    }
+    int retsy(){
+        return sy;
+    }
     bool kivan(){
         return selected;
     }
@@ -85,7 +97,7 @@ public:
         if(Oturn==true and Xturn==false and ev.button>0){
             for(int i=0;i<ures.size();i++){
                 if(ures[i].kivan()==true)
-                O.push_back(ures[i]);
+                O.push_back();
             }
         }
     }
