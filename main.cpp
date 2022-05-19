@@ -106,7 +106,7 @@ public:
             }
         }
     }
-    void gyozelemO(){
+    bool gyozelemO(){
         int counter=0;
         int seged=0;
         bool horizontal;
