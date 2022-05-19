@@ -1,6 +1,9 @@
 #include "graphics.hpp"
 #include "cmath"
+#include "vector"
+
 using namespace genv;
+using namespace std;
 
 class widget{
 protected:
@@ -17,6 +20,9 @@ public:
     void setsize(int new_x, int new_y){
         sx=new_x;
         sy=new_y;
+    }
+    bool kivan(){
+        return selected;
     }
     void kivalsztva(event ev){
         if(ev.type==ev_mouse){
@@ -39,7 +45,7 @@ public:
     }
 };
 
-struct mezoO:widget{
+struct mezoO:mezoures{
 protected:
 public:
     void rajz(){
@@ -54,12 +60,34 @@ public:
     }
 };
 
-struct mezoX:widget{
+struct mezoX:mezoures{
 protected:
 public:
     void rajz(){
         gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
-        gout<<color(0,0255)<<move_to(x-1,y-1)<<line(sx-2,sy-2)<<move(0,-sy+2)<<line(-sx+1,sy+1);
+        gout<<color(0,0,255)<<move_to(x-1,y-1)<<line(sx-2,sy-2)<<move_to(x+sx-3,y-1)<<line(-sx+1,sy+1);
+    }
+};
+
+class maistro{
+protected:
+    bool Xturn=false;
+    bool Oturn=true;
+    int mapsize;
+    vector<mezoures> ures;
+    vector<mezoO> O;
+    vector<mezoX> X;
+public:
+    void setmap(int newsize){
+        mapsize=newsize;
+    }
+    void turn(event ev){
+        if(Oturn==true and Xturn==false and ev.button>0){
+            for(int i=0;i<ures.size();i++){
+                if(ures[i].kivan()==true)
+                O.push_back(ures[i]);
+            }
+        }
     }
 };
 
