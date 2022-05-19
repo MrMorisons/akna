@@ -54,11 +54,12 @@ public:
     }
 };
 
-struct mezoy:widget{
+struct mezoX:widget{
 protected:
 public:
     void rajz(){
         gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
+        gout<<color(0,0255)<<move_to(x-1,y-1)<<line(sx-2,sy-2)<<move(0,-sy+2)<<line(-sx+1,sy+1);
     }
 };
 
