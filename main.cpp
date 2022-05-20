@@ -43,6 +43,9 @@ public:
             if(ev.pos_x >= x and ev.pos_y >= y and ev.pos_x  <= x+sx and ev.pos_y <= y+sy and ev.button>0){
                 selected=true;
             }
+            else{
+                selected=false;
+            }
         }
     }
     void rajz();
@@ -76,14 +79,14 @@ protected:
 public:
     void rajz(){
         gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x+1,y+1)<<box(sx-2,sy-2);
-        gout<<color(0,0,255)<<move_to(x-1,y-1)<<line(sx-2,sy-2)<<move_to(x+sx-3,y-1)<<line(-sx+1,sy+1);
+        gout<<color(0,0,255)<<move_to(x+1,y+1)<<line(sx-2,sy-2)<<move_to(x+sx-1,y+1)<<line(-sx+1,sy+1);
     }
 };
 
 class maistro{
 protected:
-    bool Xturn=false;
-    bool Oturn=true;
+    bool Xturn=true;
+    bool Oturn=false;
     int mapsize;
     vector<mezoures> ures;
     vector<mezoO> O;
@@ -264,8 +267,8 @@ int main()
     k.setgamemap();
     event ev;
     while(gin >> ev and ev.keycode!=key_escape){
-            k.gamemap(ev);
             k.athelyez(ev);
+            k.gamemap(ev);
             gout<<refresh;
     }
     return 0;
