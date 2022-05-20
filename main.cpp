@@ -4,8 +4,8 @@
 
 using namespace genv;
 using namespace std;
-int const xx=1500;
-int const yy=1500;
+int const xx=1000;
+int const yy=1000;
 
 class widget{
 protected:
@@ -40,11 +40,8 @@ public:
     }
     void kivalsztva(event ev){
         if(ev.type==ev_mouse){
-            if(ev.pos_x >= x and ev.pos_y >= y and ev.pos_x  <= x+sx and ev.pos_y <= y+sy and ev.button<0){
+            if(ev.pos_x >= x and ev.pos_y >= y and ev.pos_x  <= x+sx and ev.pos_y <= y+sy and ev.button>0){
                 selected=true;
-            }
-            else{
-                selected=false;
             }
         }
     }
@@ -55,7 +52,7 @@ struct mezoures:widget{
 protected:
 public:
     void rajz(){
-        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
+        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x+1,y+1)<<box(sx-2,sy-2);
     }
 };
 
@@ -63,7 +60,7 @@ struct mezoO:mezoures{
 protected:
 public:
     void rajz(){
-        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
+        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x+1,y+1)<<box(sx-2,sy-2);
         for(int i=0;i<sy;i++){
             for(int j=0;j<sx;j++){
                 if(i^2+j^2==((sx-2)/2)^2){
@@ -78,7 +75,7 @@ struct mezoX:mezoures{
 protected:
 public:
     void rajz(){
-        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x-1,y-1)<<box(sx-1,sy-1);
+        gout<<color(255,255,255)<<move_to(x,y)<<box(sx,sy)<<color(0,0,0)<<move_to(x+1,y+1)<<box(sx-2,sy-2);
         gout<<color(0,0,255)<<move_to(x-1,y-1)<<line(sx-2,sy-2)<<move_to(x+sx-3,y-1)<<line(-sx+1,sy+1);
     }
 };
@@ -96,23 +93,27 @@ public:
         mapsize=newsize;
     }
     void setgamemap(){
-        for(int i;i<mapsize;i++){
-            for(int j;j<mapsize;j++){
+        for(int i=0;i<mapsize;i++){
+            for(int j=0;j<mapsize;j++){
                 mezoures uj;
                 uj.setsize(xx/mapsize,yy/mapsize);
                 uj.setkord(i*uj.retsx(),j*uj.retsy());
+                ures.push_back(uj);
             }
         }
     }
-    void gamemap(){
+    void gamemap(event ev){
         for(int i=0;i<ures.size() or i<O.size()+X.size();i++){
             if(i<ures.size()){
+                ures[i].kivalsztva(ev);
                 ures[i].rajz();
             }
             if(i<O.size()){
+                O[i].kivalsztva(ev);
                 O[i].rajz();
             }
             if(i<X.size()){
+                X[i].kivalsztva(ev);
                 X[i].rajz();
             }
         }
@@ -233,6 +234,8 @@ public:
                     uj.setkord(ures[i].retx(),ures[i].rety());
                     uj.setsize(ures[i].retsx(),ures[i].retsy());
                     O.push_back(uj);
+                    Xturn=true;
+                    Oturn=false;
                 }
             }
         }
@@ -243,6 +246,8 @@ public:
                     uj.setkord(ures[i].retx(),ures[i].rety());
                     uj.setsize(ures[i].retsx(),ures[i].retsy());
                     X.push_back(uj);
+                    Xturn=false;
+                    Oturn=true;
                 }
             }
         }
@@ -253,8 +258,15 @@ int main()
 {
 
     gout.open(xx,yy);
+    gout<<refresh;
+    maistro k;
+    k.setmapsiz(15);
+    k.setgamemap();
     event ev;
-    while(gin >> ev) {
+    while(gin >> ev and ev.keycode!=key_escape){
+            k.gamemap(ev);
+            k.athelyez(ev);
+            gout<<refresh;
     }
     return 0;
 }
